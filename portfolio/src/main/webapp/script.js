@@ -26,3 +26,20 @@ function addRandomGreeting() {
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
 }
+
+function addRandomTVQuote() {
+  const tvQuotes =
+      ['"Great, Get In There And Operate, Doctor Google" - Kendall Roy [Succession]', 
+      '“Sometimes I’ll start a sentence and I don’t even know where it’s going. I just hope I find it along the way." – Michael Scott [The Office]', 
+      '"If Anyone Is Feeling Anxious Or Worried Or Even If You Just Want To Chat, Please, Please, Do Not Come Crying To Me.” - Sister Michael [Derry Girls]', 
+      '“You should wash your hands, you dirty pig! - Eric Effiong [Sex Education]', 
+      '“I Get It Now, Why Men Rule The World: No High Heels.” - Midge Maisel [The Marvelous Mrs Maisel]', 
+      '"Huzzah" - Peter III of Russia [The Great]'];
+
+  // Pick a random greeting.
+  const tvQuote = tvQuotes[Math.floor(Math.random() * tvQuotes.length)];
+
+  // Add it to the page.
+  const tvQuoteContainer = document.getElementById('tvQuote-container');
+  tvQuoteContainer.innerText = tvQuote;
+}
