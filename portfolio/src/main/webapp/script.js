@@ -36,10 +36,11 @@ function addRandomTVQuote() {
       '“I Get It Now, Why Men Rule The World: No High Heels.” - Midge Maisel [The Marvelous Mrs Maisel]', 
       '"Huzzah" - Peter III of Russia [The Great]'];
 
-  // Pick a random greeting.
+  // Pick a random quote.
   const tvQuote = tvQuotes[Math.floor(Math.random() * tvQuotes.length)];
 
   // Add it to the page.
   const tvQuoteContainer = document.getElementById('tvQuote-container');
   tvQuoteContainer.innerText = tvQuote;
 }
+

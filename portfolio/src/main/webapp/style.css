@@ -2,8 +2,101 @@
   margin-left: auto;
   margin-right: auto;
   width: 650px;
+  padding: 16px;
+  margin-bottom: 30px;
+  background-color:rgb(132, 202, 243)
+}
+
+#content img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+#content h1 {
+  margin-left: auto;
+  margin-right: auto;
+  text-align: center;
 }
 
 #greeting-container {
   margin-top: 20px;
 }
+
+#tvQuote-container {
+  margin-top: 20px;
+  margin-bottom: 20px;
+}
+
+#nav-bar {
+  margin-top: 100px;
+  margin-bottom: 0px;
+  margin-left: auto;
+  margin-right: auto;
+  overflow: hidden;
+  background-color: #333;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
+}
+
+#nav-bar a {
+  float: left;
+  display: block;
+  color: #f2f2f2;
+  text-align: center;
+  padding: 14px 16px;
+  text-decoration: none;
+  font-size: 17px;
+}
+
+#nav-bar a:hover {
+  background: #f1f1f1;
+  color: black;
+}
+
+#projects {
+  background-color:rgb(44, 154, 218)
+}
+
+#projects tr:hover {
+    background-color:rgb(217, 238, 250)
+}
+
+#contact {
+  list-style-type: none;
+  text-align: center;
+  margin: 0;
+  padding: 0;
+}
+
+ul#contact li {
+  display: inline-block;
+  padding: 20px;
+}
+
+#gallery {
+  margin: 5px;
+  border: 1px solid #ccc;
+  float: left;
+  width: 180px;
+  padding: 6px;
+  background-color:rgb(132, 202, 243)
+}
+
+#gallery:hover {
+  border: 5px solid #777;
+}
+
+#gallery img {
+  width: 100%;
+  height: auto;
+  display: inline-block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+
+
+
+
