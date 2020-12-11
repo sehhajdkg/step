@@ -12,8 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Adds in navigation bar to each page.
+document.addEventListener('DOMContentLoaded', loadNavBar);
+function loadNavBar(){
+    document.getElementById("nav-bar").innerHTML='<object type="text/html" data="nav-bar.html" width=100% height="50"></object >';
+}
+
 /**
- * Adds a random greeting to the page.
+ * Adds a random greeting to the welcome home page.
  */
 function addRandomGreeting() {
   const greetings =
@@ -27,6 +33,9 @@ function addRandomGreeting() {
   greetingContainer.innerText = greeting;
 }
 
+/**
+ * Adds a random tv quote to the welcome home page.
+ */
 function addRandomTVQuote() {
   const tvQuotes =
       ['"Great, Get In There And Operate, Doctor Google" - Kendall Roy [Succession]', 
@@ -43,4 +52,3 @@ function addRandomTVQuote() {
   const tvQuoteContainer = document.getElementById('tvQuote-container');
   tvQuoteContainer.innerText = tvQuote;
 }
-
