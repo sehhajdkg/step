@@ -5,12 +5,14 @@
     <title>sehhaj portfolio</title>
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
-  </head>
+  </head> 
   <body>
     <div id="content">
       <h1>sehhaj's portfolio</h1>
       <img src="./images/pd.jpg" alt="me when i drive" style="width:423px;height:432px;">
       <p>enter at your own risk.</p>
+      <button onclick="getDataWithAsyncAwait()">Fetch a personal greeting</button>
+      <div id="data-container"></div>
       <h3>Click here to get a random message:</h3>
       <button onclick="addRandomGreeting()">Hello</button>
       <div id="greeting-container"></div>

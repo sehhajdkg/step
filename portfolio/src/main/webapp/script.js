@@ -14,7 +14,7 @@
 
 // Adds in navigation bar to each page.
 document.addEventListener('DOMContentLoaded', loadNavBar);
-function loadNavBar(){
+function loadNavBar(){ 
     document.getElementById("nav-bar").innerHTML='<object type="text/html" data="nav-bar.html" width=100% height="50"></object >';
 }
 
@@ -51,4 +51,15 @@ function addRandomTVQuote() {
   // Add it to the page.
   const tvQuoteContainer = document.getElementById('tvQuote-container');
   tvQuoteContainer.innerText = tvQuote;
+}
+
+/**
+ * Using async and await to fetch personal greeting data.
+ */
+async function getDataWithAsyncAwait() {
+  console.log('Fetching some data');
+  const response = await fetch('/data');
+  const quote = await response.text();
+  document.getElementById('data-container').innerHTML = quote;
+  console.log('Personal greeting successfully displayed woohoo');
 }
