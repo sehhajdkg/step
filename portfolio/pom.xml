@@ -35,7 +35,7 @@
         <version>2.2.0</version>
         <configuration>
           <!-- TODO: set project ID. -->
-          <deploy.projectId>google.com:sehhaj-step</deploy.projectId>
+          <deploy.projectId>sehhaj-starter</deploy.projectId>
           <deploy.version>1</deploy.version>
         </configuration>
       </plugin>
