@@ -12,8 +12,14 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
+// Adds in navigation bar to each page.
+document.addEventListener('DOMContentLoaded', loadNavBar);
+function loadNavBar(){
+    document.getElementById("nav-bar").innerHTML='<object type="text/html" data="nav-bar.html" width=100% height="50"></object >';
+}
+
 /**
- * Adds a random greeting to the page.
+ * Adds a random greeting to the welcome home page.
  */
 function addRandomGreeting() {
   const greetings =
@@ -25,4 +31,24 @@ function addRandomGreeting() {
   // Add it to the page.
   const greetingContainer = document.getElementById('greeting-container');
   greetingContainer.innerText = greeting;
+}
+
+/**
+ * Adds a random tv quote to the welcome home page.
+ */
+function addRandomTVQuote() {
+  const tvQuotes =
+      ['"Great, Get In There And Operate, Doctor Google" - Kendall Roy [Succession]', 
+      '“Sometimes I’ll start a sentence and I don’t even know where it’s going. I just hope I find it along the way." – Michael Scott [The Office]', 
+      '"If Anyone Is Feeling Anxious Or Worried Or Even If You Just Want To Chat, Please, Please, Do Not Come Crying To Me.” - Sister Michael [Derry Girls]', 
+      '“You should wash your hands, you dirty pig! - Eric Effiong [Sex Education]', 
+      '“I Get It Now, Why Men Rule The World: No High Heels.” - Midge Maisel [The Marvelous Mrs Maisel]', 
+      '"Huzzah" - Peter III of Russia [The Great]'];
+
+  // Pick a random quote.
+  const tvQuote = tvQuotes[Math.floor(Math.random() * tvQuotes.length)];
+
+  // Add it to the page.
+  const tvQuoteContainer = document.getElementById('tvQuote-container');
+  tvQuoteContainer.innerText = tvQuote;
 }
