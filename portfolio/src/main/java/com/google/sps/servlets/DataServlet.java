@@ -19,14 +19,38 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.ArrayList;
+import java.util.List;
+import com.google.gson.Gson;
 
 /** Servlet that returns some example content. TODO: modify this file to handle comments data */
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
   @Override
-  public void doGet(HttpServletRequest request, HttpServletResponse response) throws IOException {
-    response.setContentType("text/html;");
-    response.getWriter().println("<h1>Hello Sehhaj!</h1>");
+  public void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
+
+        // Initialise messages with three hard-coded values
+        ArrayList<String> messages = new ArrayList<String>();
+        messages.add("Lesser leather never weathered wetter weather better");
+        messages.add("Which witch is which?");
+        messages.add("Fred fed Ted bread, and Ted fed Fred bread");
+
+        // Convert to JSON format
+        String json = convertToJsonUsingGson(messages);
+
+        // Send JSON as response
+        response.setContentType("application/json;");
+        response.getWriter().println(json);
+    }
+
+    /**
+     * Converts a an ArrayList<String> instance into a JSON string using the Gson
+     * library.
+     */
+    private String convertToJsonUsingGson(ArrayList<String> data) {
+        final Gson gson = new Gson();
+        final String json = gson.toJson(data);
+    return json;
   }
 }

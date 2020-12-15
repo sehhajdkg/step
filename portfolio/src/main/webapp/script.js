@@ -54,10 +54,22 @@ function addRandomTVQuote() {
 }
 
 /**
- * Using async and await to fetch personal greeting data.
+ * Using async and await to fetch list data.
  */
 async function getDataWithAsyncAwait() {
   const response = await fetch('/data');
-  const quote = await response.text();
-  document.getElementById('data-container').innerHTML = quote;
+  const messages = await response.json();
+
+  const messagesListElement = document.getElementById('data-container');
+  messagesListElement.innerHTML = '';
+  for(i = 0; i < messages.length; i++) {
+    messagesListElement.appendChild(createListElement(messages[i]));
+  }
+}
+
+/** Creates an <li> element containing text. */
+function createListElement(text) {
+  const liElement = document.createElement('li');
+  liElement.innerText = text;
+  return liElement;
 }
