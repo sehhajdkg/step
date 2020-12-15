@@ -57,9 +57,7 @@ function addRandomTVQuote() {
  * Using async and await to fetch personal greeting data.
  */
 async function getDataWithAsyncAwait() {
-  console.log('Fetching some data');
   const response = await fetch('/data');
   const quote = await response.text();
   document.getElementById('data-container').innerHTML = quote;
-  console.log('Personal greeting successfully displayed woohoo');
 }
