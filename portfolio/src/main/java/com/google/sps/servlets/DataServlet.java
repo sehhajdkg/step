@@ -52,5 +52,6 @@ public class DataServlet extends HttpServlet {
     private String toJsonArray(List<String> data) {
         final String json = gson.toJson(data);
         return json;
-  }
+
+    }
 }
