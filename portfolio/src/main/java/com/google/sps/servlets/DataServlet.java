@@ -31,7 +31,7 @@ public class DataServlet extends HttpServlet {
   public void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
 
         // Initialise messages with three hard-coded values
-        ArrayList<String> messages = new ArrayList<String>();
+        List<String> messages = new ArrayList<String>();
         messages.add("Lesser leather never weathered wetter weather better");
         messages.add("Which witch is which?");
         messages.add("Fred fed Ted bread, and Ted fed Fred bread");
@@ -48,7 +48,7 @@ public class DataServlet extends HttpServlet {
      * Converts a an ArrayList<String> instance into a JSON string using the Gson
      * library.
      */
-    private String convertToJsonUsingGson(ArrayList<String> data) {
+    private String convertToJsonUsingGson(List<String> data) {
         final Gson gson = new Gson();
         final String json = gson.toJson(data);
         return json;
