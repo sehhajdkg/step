@@ -27,9 +27,11 @@ import com.google.gson.Gson;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+  private final Gson gson = new Gson();
+
   @Override
   public void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-
+        
         // Initialise messages with three hard-coded values
         List<String> messages = new ArrayList<String>();
         messages.add("Lesser leather never weathered wetter weather better");
@@ -37,7 +39,7 @@ public class DataServlet extends HttpServlet {
         messages.add("Fred fed Ted bread, and Ted fed Fred bread");
 
         // Convert to JSON format
-        String json = convertToJsonUsingGson(messages);
+        String json = toJsonArray(messages);
 
         // Send JSON as response
         response.setContentType("application/json;");
@@ -45,11 +47,9 @@ public class DataServlet extends HttpServlet {
     }
 
     /**
-     * Converts a an ArrayList<String> instance into a JSON string using the Gson
-     * library.
+     * Converts input to a JSON Array
      */
-    private String convertToJsonUsingGson(List<String> data) {
-        final Gson gson = new Gson();
+    private String toJsonArray(List<String> data) {
         final String json = gson.toJson(data);
         return json;
   }
