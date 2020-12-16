@@ -32,25 +32,25 @@ public class DataServlet extends HttpServlet {
   @Override
   public void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
         
-        // Initialise messages with three hard-coded values
-        List<String> messages = new ArrayList<String>();
-        messages.add("Lesser leather never weathered wetter weather better");
-        messages.add("Which witch is which?");
-        messages.add("Fred fed Ted bread, and Ted fed Fred bread");
+    // Initialise messages with three hard-coded values
+    List<String> messages = new ArrayList<String>();
+    messages.add("Lesser leather never weathered wetter weather better");
+    messages.add("Which witch is which?");
+    messages.add("Fred fed Ted bread, and Ted fed Fred bread");
 
-        // Convert to JSON format
-        String json = toJsonArray(messages);
+    // Convert to JSON format
+    String json = toJsonArray(messages);
 
-        // Send JSON as response
-        response.setContentType("application/json;");
-        response.getWriter().println(json);
-    }
+    // Send JSON as response
+    response.setContentType("application/json;");
+    response.getWriter().println(json);
+  }
 
-    /**
-     * Converts input to a JSON Array
-     */
-    private String toJsonArray(List<String> data) {
-        final String json = gson.toJson(data);
-        return json;
-    }
+  /**
+  * Converts input to a JSON Array
+  */
+  private String toJsonArray(List<String> data) {
+    final String json = gson.toJson(data);
+    return json;
+  }
 }
