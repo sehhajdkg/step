@@ -54,22 +54,50 @@ function addRandomTVQuote() {
 }
 
 /**
- * Using async and await to fetch list data.
+ * Load comments from server and add them to page.
  */
-async function getDataWithAsyncAwait() {
-  const response = await fetch('/data');
-  const messages = await response.json();
-
-  const messagesListElement = document.getElementById('data-container');
-  messagesListElement.innerHTML = '';
-  for(i = 0; i < messages.length; i++) {
-    messagesListElement.appendChild(createListElement(messages[i]));
-  }
+function loadComments() {
+  fetch('/data').then(response => response.json()).then((comments) => {
+    const commentListElement = document.getElementById('comment-container');
+    comments.forEach((comment) => {
+      commentListElement.appendChild(createCommentElement(comment));
+    })
+  });
 }
 
-/** Creates an <li> element containing text. */
-function createListElement(text) {
-  const liElement = document.createElement('li');
-  liElement.innerText = text;
-  return liElement;
+/** Creates an <li> element for a comment that has name,comment, time and option to delete. */
+function createCommentElement(comment) {
+  const commentElement = document.createElement('li');
+  commentElement.className = 'comment';
+
+  const nameElement = document.createElement('span');
+  nameElement.innerText = "Name:" + comment.name + "    ";
+
+  const messageElement = document.createElement('span');
+  messageElement.innerText = "Comment:" + comment.message + "    ";
+
+  const timeElement = document.createElement('span');
+  timeElement.innerText = "Time:" + comment.timestamp;
+
+  const deleteButtonElement = document.createElement('button');
+  deleteButtonElement.innerText = 'Delete';
+  deleteButtonElement.addEventListener('click', () => {
+    deleteComment(comment);
+
+    // Remove the task from the DOM.
+    commentElement.remove();
+  });
+  
+  commentElement.appendChild(nameElement);
+  commentElement.appendChild(messageElement);
+  commentElement.appendChild(timeElement);
+  commentElement.appendChild(deleteButtonElement);
+  return commentElement;
+}
+
+/** Tells the server to delete the task. */
+function deleteComment(comment) {
+  const params = new URLSearchParams();
+  params.append('id', comment.id);
+  fetch('/delete-data', {method: 'POST', body: params});
 }
