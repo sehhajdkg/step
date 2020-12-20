@@ -28,7 +28,7 @@ import com.google.gson.Gson;
 public class DataServlet extends HttpServlet {
 
 
-  List<String> comments = new ArrayList<String>();
+  private List<String> comments = new ArrayList<String>();
   private final Gson gson = new Gson();
 
   @Override
