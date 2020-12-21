@@ -33,7 +33,6 @@ public class DataServlet extends HttpServlet {
 
   @Override
   public void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-
     // Convert to JSON format
     String json = toJsonArray(comments);
 
