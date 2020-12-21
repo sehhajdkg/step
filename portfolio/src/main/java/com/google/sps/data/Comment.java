@@ -22,7 +22,13 @@ public final class Comment {
   private final String message;
   private final long timestamp;
 
-  // Makes a new comment.
+  /**Makes a new comment.
+   * @param id - unique id for each comment
+   * @param name - name of individual writing comment
+   * @param message - the comment's text message
+   * @param timestamp - the time the comment was made
+   * @return a comment item
+   */
   public Comment(long id, String name, String message, long timestamp) {
     this.id = id;
     this.name = name;
