@@ -44,6 +44,8 @@ public class DataServlet extends HttpServlet {
 
   /**
   * Converts input to a JSON Array
+  * @param data - array of comments to be displayed
+  * @return comments converted to json array
   */
   private String toJsonArray(List<String> data) {
     final String json = gson.toJson(data);
@@ -63,6 +65,9 @@ public class DataServlet extends HttpServlet {
   }
 
   /**
+   * @param request - the client requesting information from servlet
+   * @param name - which parameter from the request is desired
+   * @param default value -  what to return if error in request parameter
    * @return the request parameter, or the default value if the parameter
    *         was not specified by the client
    */
