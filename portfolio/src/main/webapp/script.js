@@ -56,13 +56,21 @@ function addRandomTVQuote() {
 /**
  * Load comments from server and add them to page.
  */
-function loadComments() {
-  fetch('/data').then(response => response.json()).then((comments) => {
-    const commentListElement = document.getElementById('comment-container');
-    comments.forEach((comment) => {
-      commentListElement.appendChild(createCommentElement(comment));
-    })
-  });
+async function loadComments() {
+
+  // Add users limit to query string
+  const userLimit = document.getElementById("limit").value;
+  dataURL = "/data?limit=" + userLimit;
+  
+  const response = await fetch(dataURL);
+  const comments = await response.json();
+
+  const commentListElement = document.getElementById('comment-container');
+  commentListElement.innerHTML = "";
+  comments.forEach((comment) => {
+    commentListElement.appendChild(createCommentElement(comment));
+  })
+
 }
 
 /** Creates an <li> element for a comment that has name,comment, time and option to delete. */
@@ -95,9 +103,28 @@ function createCommentElement(comment) {
   return commentElement;
 }
 
-/** Tells the server to delete the task. */
+/** Tells the server to delete the comment. */
 function deleteComment(comment) {
   const params = new URLSearchParams();
   params.append('id', comment.id);
   fetch('/delete-data', {method: 'POST', body: params});
+}
+
+/** Tells the server to delete ALL comments */
+async function deleteAllComments(){
+
+  // Get all the comments on the server.
+  const response = await fetch("/data");
+  const comments = await response.json();
+
+  // Delete each comment from the server.
+  var i;
+  for(i=0; i< comments.length; i++){
+    deleteComment(comments[i]);
+  }
+
+  // Update so no more comments i.e. empty.
+  const commentListElement = document.getElementById('comment-container');
+  commentListElement.innerHTML = "";
+
 }

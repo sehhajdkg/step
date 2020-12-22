@@ -28,12 +28,6 @@ import javax.servlet.http.HttpServletResponse;
 @WebServlet("/delete-data")
 public class DeleteDataServlet extends HttpServlet {
 
-  /**
-   * Generates a new comment to add
-   * @param request - client asks information from servlet
-   * @param response - servlet writes response
-   * @return removes requested comment from page
-   */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     long id = Long.parseLong(request.getParameter("id"));
