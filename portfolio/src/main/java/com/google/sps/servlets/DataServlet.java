@@ -36,12 +36,6 @@ public class DataServlet extends HttpServlet {
 
   private final Gson gson = new Gson();
 
-  /**
-   * Gets the comments from datastore
-   * @param request - client asks information from servlet
-   * @param response - servlet writes response
-   * @return send the response back to client
-   */
   @Override
   public void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
 
@@ -65,12 +59,6 @@ public class DataServlet extends HttpServlet {
     response.getWriter().println(gson.toJson(comments));
   }
 
-  /**
-   * Generates a new comment to add
-   * @param request - client asks information from servlet
-   * @param response - servlet writes response
-   * @return adds new comment to datastore and redirects page to index page.
-   */
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     

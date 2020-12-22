@@ -57,10 +57,12 @@ function addRandomTVQuote() {
  * Load comments from server and add them to page.
  */
 function loadComments() {
-  fetch('/data').then(response => response.json()).then((comments) => {
+  fetch('/data')
+      .then((response) => (response.json()))
+      .then((comments) => {
     const commentListElement = document.getElementById('comment-container');
     comments.forEach((comment) => {
-      commentListElement.appendChild(createCommentElement(comment));
+      (commentListElement.appendChild(createCommentElement(comment)));
     })
   });
 }
