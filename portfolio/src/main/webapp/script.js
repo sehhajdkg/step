@@ -12,7 +12,9 @@
 // See the License for the specific language governing permissions and
 // limitations under the License.
 
-// Adds in navigation bar to each page.
+/**
+ * Adds in navigation bar to each page.
+ */
 document.addEventListener('DOMContentLoaded', loadNavBar);
 function loadNavBar(){ 
     document.getElementById("nav-bar").innerHTML='<object type="text/html" data="nav-bar.html" width=100% height="50"></object >';
@@ -73,21 +75,29 @@ async function loadComments() {
 
 }
 
-/** Creates an <li> element for a comment that has name,comment, time and option to delete. */
+/** 
+ * Creates an <li> element for a comment that has name,comment, time and option to delete. 
+ */
 function createCommentElement(comment) {
+
   const commentElement = document.createElement('li');
+  commentElement.setAttribute("class", "comment");
   commentElement.className = 'comment';
 
   const nameElement = document.createElement('span');
+  nameElement.setAttribute("class", "comment-name");
   nameElement.innerText = "Name:" + comment.name + "    ";
 
   const messageElement = document.createElement('span');
+  messageElement.setAttribute("class", "comment-message");
   messageElement.innerText = "Comment:" + comment.message + "    ";
 
   const timeElement = document.createElement('span');
+  timeElement.setAttribute("class", "comment-time");
   timeElement.innerText = "Time:" + comment.timestamp;
 
   const deleteButtonElement = document.createElement('button');
+  deleteButtonElement.setAttribute("class", "comment-delete");
   deleteButtonElement.innerText = 'Delete';
   deleteButtonElement.addEventListener('click', () => {
     deleteComment(comment);
@@ -127,4 +137,48 @@ async function deleteAllComments(){
   const commentListElement = document.getElementById('comment-container');
   commentListElement.innerHTML = "";
 
+}
+
+/** 
+ * Tells the server to translate comments to specified language
+ */
+async function requestTranslation() {
+
+  // Get language to translate to
+  const languageCode = document.getElementById('language').value;
+
+  // Select the comment (name,message,time) and translate
+
+  const commentNames = document.querySelectorAll(".comment-name");
+    commentNames.forEach(name => {
+      translate(name, languageCode)
+    });  
+
+  const commentMessages = document.querySelectorAll(".comment-message");
+    commentMessages.forEach(message => {
+      translate(message, languageCode)
+    });  
+
+  const commentTime = document.querySelectorAll(".comment-time");
+    commentTime.forEach(time => {
+      translate(time, languageCode)
+    });
+}
+
+function translate(textElement,languageCode) {
+
+  const translatedComment = textElement;
+
+  const params = new URLSearchParams();
+  params.append('comment', textElement.textContent);
+  params.append('languageCode', languageCode);
+
+  // Translate and update text to different language.
+  fetch('/translate', {
+    method: 'POST',
+    body: params
+  }).then(response => response.text())
+  .then((translatedMessage) => {
+    translatedComment.innerText = translatedMessage;
+  });
 }

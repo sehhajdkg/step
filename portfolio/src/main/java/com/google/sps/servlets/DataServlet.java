@@ -31,6 +31,8 @@ import com.google.appengine.api.datastore.Query;
 import com.google.appengine.api.datastore.Query.SortDirection;
 import com.google.appengine.api.datastore.FetchOptions;
 import com.google.sps.data.Comment;
+import java.time.format.DateTimeFormatter;  
+import java.time.LocalDateTime;
 
 /** Servlet to handle comments data */
 @WebServlet("/data")
@@ -60,7 +62,7 @@ public class DataServlet extends HttpServlet {
       long id = entity.getKey().getId();
       String name = (String) entity.getProperty("name");
       String message = (String) entity.getProperty("message");
-      long timestamp = (long) entity.getProperty("timestamp");
+      String timestamp = String.valueOf(entity.getProperty("timestamp"));
       
       Comment comment = new Comment(id, name, message, timestamp);
       comments.add(comment);
@@ -77,14 +79,16 @@ public class DataServlet extends HttpServlet {
     // Get the input from the form.
     String name = request.getParameter("full-name");
     String message = request.getParameter("message");
-    long timestamp = System.currentTimeMillis();
+    LocalDateTime now = LocalDateTime.now();  
+    DateTimeFormatter timestamp = DateTimeFormatter.ofPattern("yyyy/MM/dd HH:mm:ss");  
+   
 
     // Only add comments where a name and a message is given.
     if(!name.isEmpty() && !message.isEmpty()) {
       Entity commentEntity = new Entity("Comment");
       commentEntity.setProperty("name", name);
       commentEntity.setProperty("message", message);
-      commentEntity.setProperty("timestamp", timestamp);
+      commentEntity.setProperty("timestamp", timestamp.format(now).toString());
 
       DatastoreService datastore = DatastoreServiceFactory.getDatastoreService();
       datastore.put(commentEntity);
