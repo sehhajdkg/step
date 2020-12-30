@@ -14,7 +14,7 @@
   border-radius: 50%;
 }
 
-#content h1 {
+h1 {
   margin-left: auto;
   margin-right: auto;
   text-align: center;
@@ -95,7 +95,7 @@ ul#contact li {
 
 #photoGallery .galleryImg {
     width: 100%;
-    height: 160px;
+    height: 330px;
     background-repeat: no-repeat;
     background-size: cover;
     background-position: center;
@@ -173,4 +173,13 @@ ul#contact li {
 .galleryImg div:hover {
     opacity: 0.6;
     transition: all ease-in-out 100ms;
+}
+
+#chart {
+  height: 100%;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+  text-align: center;
 }

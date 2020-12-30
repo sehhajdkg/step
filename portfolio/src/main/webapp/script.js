@@ -140,7 +140,7 @@ async function deleteAllComments(){
 }
 
 /** 
- * Tells the server to translate comments to specified language
+ * Updates comments in a translated language
  */
 async function requestTranslation() {
 
@@ -165,6 +165,9 @@ async function requestTranslation() {
     });
 }
 
+/** 
+ * Tells the server to translate comments to specified language
+ */
 function translate(textElement,languageCode) {
 
   const translatedComment = textElement;
@@ -181,4 +184,71 @@ function translate(textElement,languageCode) {
   .then((translatedMessage) => {
     translatedComment.innerText = translatedMessage;
   });
+}
+
+
+/** 
+ * Creates a pie chart and adds it to the page. 
+ */
+google.charts.load('current', {'packages':['corechart']});
+google.charts.setOnLoadCallback(drawMovieChart);
+
+function drawMovieChart() {
+  const data = new google.visualization.DataTable();
+  data.addColumn('string', 'Movie');
+  data.addColumn('number', 'Count');
+        data.addRows([
+          ['Tenet', 38],
+          ['Soul', 13],
+          ['Hamilton', 45],
+          ['The Fight', 27],
+          ['Boys State', 25],
+          ['Trial of the Chicago 7', 52],
+          ['Emma', 66]
+        ]);
+
+  const options = {
+    'title': 'Favourite movies of 2020',
+    'width':600,
+    'height':700
+  };
+
+  const chart = new google.visualization.PieChart(
+      document.getElementById('moviechart-container'));
+  chart.draw(data, options);
+}
+
+/** 
+ * Creates a timeline and adds it to the page. 
+ */
+google.charts.load('current', {'packages':['timeline']});
+google.charts.setOnLoadCallback(drawMusicChart);
+
+function drawMusicChart() {
+  const container = document.getElementById('albumchart-container');
+  const chart = new google.visualization.Timeline(container);
+  const dataTable = new google.visualization.DataTable();
+
+  dataTable.addColumn({ type: 'string', id: 'Artist' });
+  dataTable.addColumn({ type: 'string', id: 'Album' });
+  dataTable.addColumn({ type: 'date', id: 'Start' });
+  dataTable.addColumn({ type: 'date', id: 'End' });
+  dataTable.addRows([
+    [ "Harry Styles", "Fine Line",  new Date(2020, 1, 1), new Date(2020, 1, 30) ],
+    [ "Emotional Oranges", "The Juice: Vol. II",  new Date(2020, 1, 30), new Date(2020, 3, 30) ],
+    [ "Dua Lipa", "Future Nostalgia",  new Date(2020, 3, 30), new Date(2020, 4, 15) ],
+    [ "The Weeknd","After Hours",  new Date(2020, 4, 15), new Date(2020, 6, 28) ],
+    [ "Lady Gaga", "Chromatica",  new Date(2020, 6, 28), new Date(2020, 7, 24) ],
+    [ "Taylor Swift", "Folklore", new Date(2020, 7, 24), new Date(2020, 10, 30) ],
+    [ "Ariana Grande", "Positions",  new Date(2020, 10, 30), new Date(2020, 12, 11) ],
+    [ "Taylor Swift", "Evermore", new Date(2020, 12, 11), new Date(2020, 12, 30) ]
+  ]);
+
+  const options = {
+    'title': 'Favourite albums of 2020',
+    'width':1000,
+    'height':800
+  };
+
+  chart.draw(dataTable, options);
 }
