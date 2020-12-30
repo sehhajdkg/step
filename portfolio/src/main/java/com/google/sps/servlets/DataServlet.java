@@ -47,16 +47,21 @@ public class DataServlet extends HttpServlet {
 
     // Limit on the number of comments to get from datastore.
     String userLimit = request.getParameter("limit");
-    FetchOptions limit;
 
-    if(userLimit == null || userLimit.isEmpty()) {
-       limit = FetchOptions.Builder.withLimit(results.countEntities(FetchOptions.Builder.withDefaults()));
-    } else {
-       limit = FetchOptions.Builder.withLimit(Integer.parseInt(userLimit));
+    // Initialise limit with max (all comments in datastore)
+    FetchOptions fetchOptionsWithLimit = FetchOptions.Builder.withLimit(results.countEntities(FetchOptions.Builder.withDefaults()));
+
+    if(userLimit != null && userLimit.isEmpty() == false) {       
+      try {
+        fetchOptionsWithLimit = FetchOptions.Builder.withLimit(Integer.parseInt(userLimit));
+      } 
+      catch(Exception e) {
+        System.out.println(e + "Warning! The number of comments to display MUST be an integer. You have inputted " + userLimit);
+      }    
     }
     
     List<Comment> comments = new ArrayList<>();
-    for (Entity entity : results.asIterable(limit)) {
+    for (Entity entity : results.asIterable(fetchOptionsWithLimit)) {
       long id = entity.getKey().getId();
       String name = (String) entity.getProperty("name");
       String message = (String) entity.getProperty("message");

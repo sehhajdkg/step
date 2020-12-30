@@ -118,10 +118,9 @@ async function deleteAllComments(){
   const comments = await response.json();
 
   // Delete each comment from the server.
-  var i;
-  for(i=0; i< comments.length; i++){
-    deleteComment(comments[i]);
-  }
+  comments.forEach(comment => {
+    deleteComment(comment);
+  });
 
   // Update so no more comments i.e. empty.
   const commentListElement = document.getElementById('comment-container');
