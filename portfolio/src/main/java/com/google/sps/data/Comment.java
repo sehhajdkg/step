@@ -22,7 +22,7 @@ public final class Comment {
   private final String message;
   private final long timestamp;
 
-  /**Makes a new comment.
+  /** Makes a new comment.
    * @param id - unique id for each comment
    * @param name - name of individual writing comment
    * @param message - the comment's text message

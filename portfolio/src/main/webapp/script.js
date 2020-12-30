@@ -70,7 +70,6 @@ async function loadComments() {
   comments.forEach((comment) => {
     commentListElement.appendChild(createCommentElement(comment));
   })
-
 }
 
 /** Creates an <li> element for a comment that has name,comment, time and option to delete. */

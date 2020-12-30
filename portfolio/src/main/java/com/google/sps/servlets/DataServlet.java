@@ -36,6 +36,8 @@ import com.google.sps.data.Comment;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+
+  private List<String> comments = new ArrayList<String>();
   private final Gson gson = new Gson();
 
   @Override
@@ -98,4 +100,5 @@ public class DataServlet extends HttpServlet {
     response.sendRedirect("/index.html");  
 
   } 
+
 }
