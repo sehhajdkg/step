@@ -6,18 +6,21 @@
     <link rel="stylesheet" href="style.css">
     <script src="script.js"></script>
   </head>
-  <body>
+  <body onload="loadComments()">
     <div id="content">
       <h1>sehhaj's portfolio</h1>
       <img src="./images/pd.jpg" alt="me when i drive" style="width:423px;height:432px;">
       <h3>enter at your own risk.</h3>
       <p>Comment your favourite tongue twister</p>
       <form action="/data" method="POST">
-        <textarea name="comment"></textarea>
-        <br/>      
+        <label for="full-name">Name: </label>
+        <input id="full-name" type="text" name="full-name">
+        <label for="message">Comment: </label> 
+        <textarea id="message" name="message" ></textarea>
+        <br/>     
         <input type="submit"/>
       </form>
-      <div id="data-container"></div>
+      <div id="comment-container"></div>
       <h3>Click here to get a random message:</h3>
       <button onclick="addRandomGreeting()">Hello</button>
       <div id="greeting-container"></div>
