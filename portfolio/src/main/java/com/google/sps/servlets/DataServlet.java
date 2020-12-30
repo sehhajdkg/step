@@ -34,6 +34,8 @@ import com.google.sps.data.Comment;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+
+  private List<String> comments = new ArrayList<String>();
   private final Gson gson = new Gson();
 
   @Override
@@ -59,6 +61,7 @@ public class DataServlet extends HttpServlet {
     response.getWriter().println(gson.toJson(comments));
   }
 
+
   @Override
   public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
     
@@ -78,4 +81,5 @@ public class DataServlet extends HttpServlet {
     response.sendRedirect("/index.html");
     
   } 
+
 }
