@@ -207,7 +207,7 @@ public final class FindMeetingQueryTest {
     // Events  : |--A--|     |----A----|
     // Day     : |---------------------|
     // Options :       |-----|
-
+    
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0830AM, false),
             Arrays.asList(PERSON_A)),
@@ -271,4 +271,3 @@ public final class FindMeetingQueryTest {
     Assert.assertEquals(expected, actual);
   }
 }
-
