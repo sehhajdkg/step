@@ -27,19 +27,14 @@ import com.google.gson.Gson;
 @WebServlet("/data")
 public class DataServlet extends HttpServlet {
 
+
+  private List<String> comments = new ArrayList<String>();
   private final Gson gson = new Gson();
 
   @Override
   public void doGet(final HttpServletRequest request, final HttpServletResponse response) throws IOException {
-        
-    // Initialise messages with three hard-coded values
-    List<String> messages = new ArrayList<String>();
-    messages.add("Lesser leather never weathered wetter weather better");
-    messages.add("Which witch is which?");
-    messages.add("Fred fed Ted bread, and Ted fed Fred bread");
-
     // Convert to JSON format
-    String json = toJsonArray(messages);
+    String json = toJsonArray(comments);
 
     // Send JSON as response
     response.setContentType("application/json;");
@@ -48,9 +43,38 @@ public class DataServlet extends HttpServlet {
 
   /**
   * Converts input to a JSON Array
+  * @param data - array of comments to be displayed
+  * @return comments converted to json array
   */
   private String toJsonArray(List<String> data) {
     final String json = gson.toJson(data);
     return json;
   }
+
+  @Override
+  public void doPost(HttpServletRequest request, HttpServletResponse response) throws IOException {
+    // Get the input from the form.
+    String text = getParameter(request, "comment", "");
+
+    comments.add(text);
+
+    // Respond with the updated comments.
+    response.setContentType("text/html;");
+    response.getWriter().println(comments.toString());
+  }
+
+  /**
+   * @param request - the client requesting information from servlet
+   * @param name - which parameter from the request is desired
+   * @param default value -  what to return if error in request parameter
+   * @return the request parameter, or the default value if the parameter
+   *         was not specified by the client
+   */
+  private String getParameter(HttpServletRequest request, String name, String defaultValue) {
+    String value = request.getParameter(name);
+    if (value == null) {
+      return defaultValue;
+    }
+    return value;
+  }  
 }
