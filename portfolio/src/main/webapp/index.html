@@ -20,7 +20,29 @@
         <br/>     
         <input type="submit"/>
       </form>
+      
+      <form id="displayComments" onsubmit="loadComments();return false">
+        <p>Number of Comments to Display</p>
+        <input type="number" id="limit" name="limit" min="1" max="10" >
+        <input type="submit">
+      </form>
+      <p>Translation</p>
+      <select id="language">
+        <option value="en">English</option>
+        <option value="ja">Japanese</option>
+        <option value="fr">French</option>
+        <option value="de">German</option>
+        <option value="hi">Hindi</option>
+        <option value="pa">Punjabi</option>
+      </select>
+
+      <button onclick="requestTranslation();return false">Translate</button>
+
+      <hr/>
+      <h3>Comments</h3>
       <div id="comment-container"></div>
+
+      <button type="submit" onClick="deleteAllComments()">Delete All</button>
       <h3>Click here to get a random message:</h3>
       <button onclick="addRandomGreeting()">Hello</button>
       <div id="greeting-container"></div>
