@@ -18,9 +18,9 @@ package com.google.sps.data;
 public final class Comment {
 
   private final long id;
-  private final String name;
-  private final String message;
-  private final long timestamp;
+  private String name;
+  private String message;
+  private final String timestamp;
 
   /** Makes a new comment.
    * @param id - unique id for each comment
@@ -29,7 +29,7 @@ public final class Comment {
    * @param timestamp - the time the comment was made
    * @return a comment item
    */
-  public Comment(long id, String name, String message, long timestamp) {
+  public Comment(long id, String name, String message, String timestamp) {
     this.id = id;
     this.name = name;
     this.message = message;
