@@ -166,13 +166,13 @@ public final class FindMeetingQuery {
    * @param optional - events that optional attendees in the request have to attend.
    * @return list of events.
    */
-  public List<Event> getAllUniqueEvents(List<Event> mandatory, List<Event> optional) {
+  public List<Event> getAllUniqueEvents(List<Event> mandatoryEvents, List<Event> optionalEvents) {
 
-    List<Event> allEvents = new ArrayList<>(mandatory);
+    List<Event> allEvents = new ArrayList<>(mandatoryEvents);
 
-    for(Event opt : optional){
-      if(!allEvents.contains(opt)){
-        allEvents.add(opt);
+    for(Event optionalEvent : optionalEvents){
+      if(!allEvents.contains(optionalEvent)){
+        allEvents.add(optionalEvent);
       }
     }
     return allEvents;
@@ -184,15 +184,21 @@ public final class FindMeetingQuery {
    */
   public List<Event> sortEventsByStartTime(List<Event> events) {
 
-    for(int i = 0; i < events.size()-1; i++) {
-      for(int j = 0; j < events.size()-i-1; j++){
-        if(events.get(j).getWhen().start() > events.get(j+1).getWhen().start()){
-          Event temp = events.get(j+1);
-          events.set(j+1, events.get(j));
-          events.set(j, temp);
-        }
-      }
-    }
-    return events;
-  } 
+
+    events.sort(c);
+
+    Comparator<TimeRange> ORDER_BY_START = TimeRange.ORDER_BY_START;
+    Collections.sort(events, ORDER_BY_START);
+
+  //   for(int i = 0; i < events.size()-1; i++) {
+  //     for(int j = 0; j < events.size()-i-1; j++){
+  //       if(events.get(j).getWhen().start() > events.get(j+1).getWhen().start()){
+  //         Event temp = events.get(j+1);
+  //         events.set(j+1, events.get(j));
+  //         events.set(j, temp);
+  //       }
+  //     }
+  //   }
+  //   return events;
+  // } 
 }
