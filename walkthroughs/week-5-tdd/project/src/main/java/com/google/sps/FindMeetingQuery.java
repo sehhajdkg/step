@@ -131,6 +131,7 @@ public final class FindMeetingQuery {
           if(prevEvent.getWhen().end() > laterEnd) {
             laterEnd = prevEvent.getWhen().end();
           }
+
           if(laterEnd+request.getDuration() <= TimeRange.END_OF_DAY){
             potentialTime.add(TimeRange.fromStartEnd(laterEnd, TimeRange.END_OF_DAY,true));
           } else {
@@ -142,7 +143,6 @@ public final class FindMeetingQuery {
           // |--prev--|...|--curr--|
           long gapDuration = currEvent.getWhen().start() - prevEvent.getWhen().end();
           if(gapDuration >= request.getDuration()){
-            System.out.println("6 ");
             potentialTime.add(TimeRange.fromStartEnd(prevEvent.getWhen().end(), currEvent.getWhen().start(), false));
           }
           // Last event in list then check there there is a gap between 
