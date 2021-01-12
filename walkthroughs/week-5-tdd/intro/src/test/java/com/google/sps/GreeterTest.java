@@ -50,4 +50,15 @@ public final class GreeterTest {
     // All characters that are not alphabet letter are removed.
     Assert.assertEquals("Hello Ada", greeting);
   }
+
+  @Test
+  public void testGreetingKeepsSpaceBetweenTwoNames() {
+    Greeter greeter = new Greeter();
+
+    String greeting = greeter.greet("$3/Sehhaj 5#Grewal@@@@       ");
+
+    // Space between names is not removed.
+    // Trailing whitespace removed.
+    Assert.assertEquals("Hello Sehhaj Grewal", greeting);
+  }
 }

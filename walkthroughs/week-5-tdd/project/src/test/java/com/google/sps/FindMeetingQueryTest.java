@@ -175,12 +175,13 @@ public final class FindMeetingQueryTest {
             Arrays.asList(PERSON_B)),
         new Event("Event 3", TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TimeRange.END_OF_DAY,true),
             Arrays.asList(PERSON_C)));    
-
+    System.out.println("testing test test test test test ");
     MeetingRequest request =
         new MeetingRequest(Arrays.asList(PERSON_A, PERSON_B), DURATION_30_MINUTES);
     request.addOptionalAttendee(PERSON_C);
 
     Collection<TimeRange> actual = query.query(events, request);
+    System.out.println("beorboenpetmo[er hpthb wpefnph] ");
     Collection<TimeRange> expected =
         Arrays.asList(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, TIME_0800AM, false),
             TimeRange.fromStartEnd(TIME_0830AM, TIME_0900AM, false),
@@ -195,13 +196,13 @@ public final class FindMeetingQueryTest {
     // Now only the early and late parts of the day should be returned. 
     // (Times when All (Optional/Mandotory) Attendees available)
 
-    // Have each person have different events. We should see three options because each person has
+    // Have each person have different events. We should see two options because each person has
     // split the restricted times.
     //
     // Events  :       |--A--|     |--B--|
     //                        |-C-|
     // Day     : |-----------------------------|
-    // Options : |--1--|     |--2--|     |--3--|
+    // Options : |--1--|                  |--3--|
 
     Collection<Event> events = Arrays.asList(
         new Event("Event 1", TimeRange.fromStartDuration(TIME_0800AM, DURATION_30_MINUTES),
