@@ -27,7 +27,7 @@ public final class FindMeetingQuery {
    * Otherwise, return the time slots that fit just the mandatory attendees.
    * @param events
    * @param request
-   * @return
+   * @return collection of available timeslots for the meeting query.
    */
   public Collection<TimeRange> query(Collection<Event> events, MeetingRequest request) {
 
@@ -49,7 +49,7 @@ public final class FindMeetingQuery {
 
     // If mandatory attendees are available all day with no booked events.
     // Try and find available times including optional event restrictions and return unless.
-    // no time that works with optional attendess works just return mandatory availabilities (All day).
+    // If no time works with optional attendess just return mandatory availabilities (All day).
     if(mandatoryBookedEvents.isEmpty()){
       Collection<TimeRange> allAvailable = findPotentialTimes(optionalBookedEvents, request);
       if(allAvailable.isEmpty()){
@@ -114,7 +114,7 @@ public final class FindMeetingQuery {
       return potentialTime;
     }  
 
-    // More than one event - check if timeslot before first event can fit request
+    // More than one event - check if timeslot before first event can fit request.
     if((TimeRange.START_OF_DAY+request.getDuration()) < bookedEvents.get(0).getWhen().start()){
       potentialTime.add(TimeRange.fromStartEnd(TimeRange.START_OF_DAY, bookedEvents.get(0).getWhen().start(),false));  
     }
@@ -125,7 +125,7 @@ public final class FindMeetingQuery {
       prevEvent = currEvent; 
       currEvent = bookedEvents.get(i); 
         // Check to see if prev and curr events overlap.
-        // add timerange from the end of the later timerange.
+        // Add timerange from the end of the later timerange.
         if(prevEvent.getWhen().overlaps(currEvent.getWhen())){
           int laterEnd = currEvent.getWhen().end();
           if(prevEvent.getWhen().end() > laterEnd) {
@@ -135,7 +135,7 @@ public final class FindMeetingQuery {
           if(laterEnd+request.getDuration() <= TimeRange.END_OF_DAY){
             potentialTime.add(TimeRange.fromStartEnd(laterEnd, TimeRange.END_OF_DAY,true));
           } else {
-            // no further timeslots can fit the request
+            // No further timeslots can fit the request.
             break;
           }
         } else {
@@ -145,8 +145,8 @@ public final class FindMeetingQuery {
           if(gapDuration >= request.getDuration()){
             potentialTime.add(TimeRange.fromStartEnd(prevEvent.getWhen().end(), currEvent.getWhen().start(), false));
           }
-          // Last event in list then check there there is a gap between 
-          // the end of the event and end of day large enough for request.
+          // Check if the timeslot between the last event in the list
+          // and the end of the day is large enough to fit the request.
           if (currEvent == bookedEvents.get(bookedEvents.size()-1)){
             if(bookedEvents.get(bookedEvents.size()-1).getWhen().end()+request.getDuration() <= TimeRange.END_OF_DAY){
               potentialTime.add(TimeRange.fromStartEnd(bookedEvents.get(bookedEvents.size()-1).getWhen().end(), TimeRange.END_OF_DAY,true));  
