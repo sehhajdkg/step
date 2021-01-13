@@ -22,6 +22,13 @@ public class Greeter {
    * Returns a greeting for the given name.
    */
   public String greet(String name) {
-    return "Hello " + name;
+    return "Hello " + allowAlphabetAndSpaceOnly(name.trim());
+  }
+
+  /**
+   * Returns name after removing all characters that are not alphabet letters or space \\s.
+   */
+  public String allowAlphabetAndSpaceOnly(String name){
+    return name.replaceAll("[^a-zA-Z\\s]", "");
   }
 }
